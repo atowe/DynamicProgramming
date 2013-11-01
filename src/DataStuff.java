@@ -6,6 +6,6 @@ public boolean canwork;
 	DataStuff(String s){
 		name=s;
 		file="src/subjects/"+s+".txt";
-		canwork=false;
+		canwork=true;
 	}
 }

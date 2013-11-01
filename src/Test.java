@@ -36,21 +36,18 @@ public class Test {
 	
 
 	private void DynamicPart(String next, int start, DataStuff d) {
-		if(next.length()==0){
+		if(next.length()==start+1){
 			d.canwork=false;
 			return;
 		}
-		Integer key=7;
-		for (int i=0; i < next.length(); i++) {
-		    key = key*31+next.charAt(i);
-		};
-		
+		int key=next.hashCode();
 		if(dictionary.containsKey(key)){
-			start+=next.length()-1;
+			start+=next.length();
 			return;
 		}else{
-			DynamicPart(next.substring(0,next.length()-2), start, d);
+			DynamicPart(next.substring(start,next.length()-2),start,d);
 		}
+		
 		
 		
 		
@@ -92,12 +89,10 @@ public class Test {
 		}
 		Scanner reader=new Scanner(file);
 		String word;
+		int key;
 		while(reader.hasNext()){
 			word=reader.next();
-			Integer key=7;
-			for (int i=0; i < word.length(); i++) {
-			    key = key*31+word.charAt(i);
-			};
+			key = word.hashCode();
 			dictionary.put(key,word);
 		}
 
