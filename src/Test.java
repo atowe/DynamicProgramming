@@ -28,24 +28,27 @@ public class Test {
 			String next;
 			while(reader.hasNext()){
 				next=reader.next();
-				DynamicPart(next,0,d);
+				DynamicPart(next,0,next.length(),d);
 			}
 		}
 	}
 
 	
 
-	private void DynamicPart(String next, int start, DataStuff d) {
-		if(next.length()==start+1){
+	private void DynamicPart(String next, int start, int end, DataStuff d) {
+		if(end==start||start<0){
 			d.canwork=false;
 			return;
 		}
-		int key=next.hashCode();
+		int key=next.substring(start,end).hashCode();
 		if(dictionary.containsKey(key)){
 			start+=next.length();
 			return;
 		}else{
-			DynamicPart(next.substring(start,next.length()-2),start,d);
+			if(start!=0){
+				DynamicPart(next,start-1,end,d);
+			}	
+			DynamicPart(next,start,end-1,d);
 		}
 		
 		
